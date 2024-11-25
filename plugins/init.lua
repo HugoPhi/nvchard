@@ -1,18 +1,53 @@
 return {
   {
-    'gorbit99/codewindow.nvim',
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = false,
+    dependencies = { "williamboman/mason.nvim" },
     config = function()
-      local codewindow = require('codewindow')
-      codewindow.setup({
+      require("mason-tool-installer").setup {
+        ensure_installed = {
+          "lua-language-server",        -- lua LSP
+          "stylua",                     -- lua formatter
+          "bash-language-server",       -- bash LSP
+          "html-lsp",                   -- html LSP
+          "css-lsp",                    -- css LSP
+          "prettier",                   -- prettier formatter: html, css, json, yaml, markdown
+          "python-lsp-server",          -- python LSP & formatter
+          "basedpyright",               -- python LSP
+          "clangd",                     -- c/c++ LSP
+          -- "r_language_server",         -- R LSP
+          "awk-language-server",        -- awk LSP
+          "dockerfile-language-server", -- dockerfile LSP
+          "typst-lsp",                  -- typst LSP
+          "gopls",                      -- go LSP
+          "julia-lsp",                  -- julia LSP
+        },
+        auto_update = false,
+        run_on_start = true,
+        -- start_delay = 3000,
+        -- debounce_hours = 5,
+        integrations = {
+          ["mason-lspconfig"] = true,
+          ["mason-null-ls"] = true,
+          ["mason-nvim-dap"] = true,
+        },
+      }
+    end,
+  },
+  {
+    "gorbit99/codewindow.nvim",
+    lazy = false,
+    config = function()
+      local codewindow = require "codewindow"
+      codewindow.setup {
         auto_enable = true,
         show_cursor = true,
-        side = 'right',
-        screen_bounds = 'lines',  -- lines, background
-        window_border = 'none',  -- none, single, double
-        lazy = false
-      })
+        side = "right",
+        screen_bounds = "lines", -- lines, background
+        window_border = "none", -- none, single, double
+      }
       codewindow.apply_default_keybinds()
-    end
+    end,
   },
   {
     "stevearc/conform.nvim",
@@ -32,16 +67,16 @@ return {
     lazy = false,
     config = function()
       vim.g.codeium_enabled = true
-    end
+    end,
   },
-  {
-    "simrat39/symbols-outline.nvim",
-    show_guides = true,
-    lazy = false,
-    config = function()
-      require("symbols-outline").setup()
-    end
-  },
+  -- {
+  --   "simrat39/symbols-outline.nvim",
+  --   show_guides = true,
+  --   lazy = false,
+  --   config = function()
+  --     require("symbols-outline").setup()
+  --   end
+  -- },
 
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -76,10 +111,12 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
     config = function()
-      vim.g.mkdp_browser = 'qutebrowser'
-      vim.g.mkdp_theme = 'dark'
+      vim.g.mkdp_browser = "qutebrowser"
+      vim.g.mkdp_theme = "dark"
       vim.g.mkdp_auto_close = 1
       -- vim.g.mkdp_markdown_css = '/home/tibless/.config/Typora/themes/hugo.css'
     end,
@@ -87,54 +124,54 @@ return {
 
   {
     "lervag/vimtex",
-    lazy = false,     -- we don't want to lazy load VimTeX
+    lazy = false, -- we don't want to lazy load VimTeX
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
       -- VimTeX configuration goes here, e.g.
       vim.g.vimtex_view_method = "zathura"
-    end
+    end,
   },
 
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
-      require("nvim-tree").setup({
+      require("nvim-tree").setup {
         -- 基本设置
         filters = { dotfiles = true },
         update_focused_file = {
-          enable = true,  -- 更新文件
-          update_cwd = true,  -- 更新当前目录
+          enable = true, -- 更新文件
+          update_cwd = true, -- 更新当前目录
         },
         view = {
-          width = 35,
-          side = 'left',
+          width = 25,
+          side = "left",
         },
         renderer = {
-          root_folder_label = true,  -- 显示根目录名称
+          root_folder_label = true, -- 显示根目录名称
           indent_markers = { enable = true },
 
           -- 自定义图标设置
           icons = {
-            webdev_colors = true,  -- 启用颜色
+            webdev_colors = true, -- 启用颜色
 
             -- 自定义文件夹图标
             glyphs = {
               folder = {
                 -- arrow_closed = "", -- 关闭的文件夹箭头
                 -- arrow_open = "",   -- 打开的文件夹箭头
-                default = " ",      -- 默认文件夹
+                default = " ", -- 默认文件夹
                 -- default = " ",      -- 默认文件夹
-                open = " ",         -- 打开的文件夹
-                empty = " ",        -- 空文件夹
+                open = " ", -- 打开的文件夹
+                empty = " ", -- 空文件夹
                 -- empty = " ",        -- 空文件夹
-                empty_open = " ",   -- 打开的空文件夹
-                symlink = " ",      -- 符号链接文件夹
+                empty_open = " ", -- 打开的空文件夹
+                symlink = " ", -- 符号链接文件夹
                 symlink_open = " ", -- 打开的符号链接文件夹
               },
 
               -- 自定义文件图标
-              default = "󰷆",  -- 默认文件
-              symlink = "",  -- 符号链接
+              default = "󰷆", -- 默认文件
+              symlink = "", -- 符号链接
               git = {
                 unstaged = "✗",
                 staged = "✓",
@@ -147,7 +184,7 @@ return {
             },
           },
         },
-      })
-    end
+      }
+    end,
   },
 }

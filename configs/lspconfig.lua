@@ -6,21 +6,21 @@ local lspconfig = require "lspconfig"
 -- EXAMPLE
 local nvlsp = require "nvchad.configs.lspconfig"
 local servers = {
-  'html',
-  'cssls',
-  -- 'basedpyright',
-  'pylsp',
-  'clangd',
-  'r_language_server',
-  'bashls',
-  'awk_ls',
-  'dockerls',
-  'sqls',
-  'rust_analyzer',
-  'typst_lsp',
-  'prosemd_lsp',
+  "html",
+  "cssls",
+  -- "basedpyright",
+  "pylsp",
+  "clangd",
+  "r_language_server",
+  "bashls",
+  "awk_ls",
+  "dockerls",
+  "sqls",
+  "rust_analyzer",
+  "typst_lsp",
+  "gopls",
+  "julials",
 }
--- "pylsp",
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -56,18 +56,3 @@ lspconfig.pylsp.setup {
     },
   },
 }
-
--- lspconfig.basedpyright.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
---   settings = {
---     python = {
---       analysis = {
---         autoSearchPaths = true,
---         useLibraryCodeForTypes = true,
---         diagnosticMode = 'workspace',
---       },
---     },
---   },
--- }

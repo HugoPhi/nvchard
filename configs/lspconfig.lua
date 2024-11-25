@@ -6,17 +6,19 @@ local lspconfig = require "lspconfig"
 -- EXAMPLE
 local nvlsp = require "nvchad.configs.lspconfig"
 local servers = {
-  "html",
-  "cssls",
-  "basedpyright",
-  "clangd",
-  "r_language_server",
-  "bashls",
-  "awk_ls",
-  "dockerls",
-  "sqls",
-  "rust_analyzer",
-  "ltex",
+  'html',
+  'cssls',
+  -- 'basedpyright',
+  'pylsp',
+  'clangd',
+  'r_language_server',
+  'bashls',
+  'awk_ls',
+  'dockerls',
+  'sqls',
+  'rust_analyzer',
+  'typst_lsp',
+  'prosemd_lsp',
 }
 -- "pylsp",
 

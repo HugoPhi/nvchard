@@ -1,5 +1,20 @@
 return {
   {
+    'gorbit99/codewindow.nvim',
+    config = function()
+      local codewindow = require('codewindow')
+      codewindow.setup({
+        auto_enable = true,
+        show_cursor = true,
+        side = 'right',
+        screen_bounds = 'lines',  -- lines, background
+        window_border = 'none',  -- none, single, double
+        lazy = false
+      })
+      codewindow.apply_default_keybinds()
+    end
+  },
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
@@ -30,31 +45,30 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "User FilePost",
-    opts = {
-      -- indent = { char = "│", highlight = "IblChar" },
-      indent = {
-        char = { "│", "│", "│", "│", "│", "│" },  -- 使用字符数组定义每个级别的缩进字符
-        highlight = { "IblChar1", "IblChar2", "IblChar3", "IblChar4", "IblChar5", "IblChar6" },  -- 定义每个级别的高亮组
-      },
-      scope = { char = "│", highlight = "IblScopeChar", enabled = false },
-    },
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "blankline")
+
+    config = function()
+      local highlight = {
+        "RainbowRed",
+        "RainbowBlue",
+        "RainbowYellow",
+        "RainbowGreen",
+        "RainbowOrange",
+        "RainbowCyan",
+        "RainbowViolet",
+      }
 
       local hooks = require "ibl.hooks"
-      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+        vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+      end)
 
-      vim.api.nvim_set_hl(0, "IblChar1", { fg = "#E06C75" })
-      vim.api.nvim_set_hl(0, "IblChar2", { fg = "#E5C07B" })
-      vim.api.nvim_set_hl(0, "IblChar3", { fg = "#98C379" })
-      vim.api.nvim_set_hl(0, "IblChar4", { fg = "#56B6C2" })
-      vim.api.nvim_set_hl(0, "IblChar5", { fg = "#61AFEF" })
-      vim.api.nvim_set_hl(0, "IblChar6", { fg = "#C678DD" })
-
-      require("ibl").setup(opts)
-
-      dofile(vim.g.base46_cache .. "blankline")
+      require("ibl").setup { indent = { highlight = highlight } }
     end,
   },
 
@@ -67,6 +81,7 @@ return {
       vim.g.mkdp_browser = 'qutebrowser'
       vim.g.mkdp_theme = 'dark'
       vim.g.mkdp_auto_close = 1
+      -- vim.g.mkdp_markdown_css = '/home/tibless/.config/Typora/themes/hugo.css'
     end,
   },
 
@@ -92,7 +107,7 @@ return {
         },
         view = {
           width = 35,
-          side = "left",
+          side = 'left',
         },
         renderer = {
           root_folder_label = true,  -- 显示根目录名称

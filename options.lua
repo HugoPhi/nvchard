@@ -1,13 +1,5 @@
 require "nvchad.options"
 
--- local autocmd = vim.api.nvim_create_autocmd
--- Auto resize panes when resizing nvim window
--- autocmd("VimResized", {
---   pattern = "*",
---   command = "tabdo wincmd =",
--- })
-
-
 vim.o.scrolloff = 5
 vim.o.relativenumber = true
 vim.o.number = true
@@ -55,12 +47,19 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
   end
 })
 
+local codewindow = require('codewindow')
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+    callback = function()
+        codewindow.open_minimap()
+    end,
+})
 
 -- neovide 
 if vim.g.neovide then
   vim.o.guifont = "Hasklug Nerd Font:h13.5" -- text below applies for VimScript
   vim.g.neovide_cursor_vfx_mode = "pixiedust"
-  vim.g.neovide_transparency = 1
+  vim.g.neovide_transparency = 0.7
 end
 
 

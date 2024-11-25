@@ -4,16 +4,10 @@ local options = {
   base46 = {
     theme = "doomchad",
     hl_add = {},
-    hl_override = {
-      Comment = {
-        fg = "#00CED1",
-        italic = true,
-      },
-    },
+    hl_override = {},
     integrations = {},
     changed_themes = {},
-    transparency = true,
-    theme_toggle = { "doomchad", "doomchad" },
+    transparency = true, theme_toggle = { "doomchad", "doomchad" },
   },
 
   ui = {
@@ -50,7 +44,8 @@ local options = {
 
   nvdash = {
     load_on_startup = true,
-    header = { "                            ",
+    header = {
+      "                            ",
       "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
       "   ▄▀███▄     ▄██ █████▀    ",
       "   ██▄▀███▄   ███           ",

@@ -1,13 +1,13 @@
 local options = {
 
   base46 = {
-    theme = "doomchad",
+    theme = "flexoki-light",
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = true,
-    theme_toggle = { "doomchad", "doomchad" },
+    theme_toggle = { "flexoki-light", "flexoki-light" },
   },
 
   ui = {
@@ -35,8 +35,8 @@ local options = {
 
     -- lazyload it when there are 1+ buffers
     tabufline = {
-      enabled = true,
-      lazyload = true,
+      enabled = false,
+      lazyload = false,
       order = { "treeOffset", "buffers", "tabs", "btns" },
       modules = nil,
     },

@@ -9,6 +9,7 @@ return {
           "lua-language-server",        -- lua LSP
           "stylua",                     -- lua formatter
           "bash-language-server",       -- bash LSP
+          "vtsls",                      -- ts, js LSP
           "html-lsp",                   -- html LSP
           "css-lsp",                    -- css LSP
           "prettier",                   -- prettier formatter: html, css, json, yaml, markdown

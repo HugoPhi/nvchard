@@ -3,13 +3,13 @@ local bannar = require "../configs/bannar"
 local options = {
 
   base46 = {
-    theme = "flexoki-light",
+    theme = "doomchad",
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = true,
-    theme_toggle = { "flexoki-light", "flexoki-light" },
+    theme_toggle = { "doomchad", "doomchad" },
   },
 
   ui = {

@@ -27,7 +27,18 @@ autocmd("BufReadPost", {
 
 --indent styler
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = { "*.rs", "*.c", "*.cpp", "*.go", "*.java", "*.typst", "*.js", "*.py", "*.sh", "*.mysql" },
+  pattern = {
+    "*.rs",
+    "*.c",
+    "*.cpp",
+    "*.go",
+    "*.java",
+    "*.typst",
+    "*.js",
+    "*.py",
+    "*.sh",
+    "*.mysql",
+  },
   callback = function()
     vim.o.tabstop = 4
     vim.o.shiftwidth = 4
@@ -46,12 +57,21 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   end,
 })
 
-local codewindow = require "codewindow"
-
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
-    codewindow.open_minimap()
+    require("virt-column").setup {
+      char = ".",
+      virtcolumn = "100",
+    }
   end,
+})
+
+-- Code Window
+vim.api.nvim_set_hl(0, "CodewindowUnderline", {
+  bg = "None",
+  fg = "#000000",
+  -- undercurl = true,  -- Underline style: curve
+  underline = true,
 })
 
 -- neovide

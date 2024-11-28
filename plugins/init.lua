@@ -4,49 +4,41 @@ return {
     lazy = false,
     dependencies = { "williamboman/mason.nvim" },
     config = function()
-      require("mason-tool-installer").setup {
-        ensure_installed = {
-          "lua-language-server",        -- lua LSP
-          "stylua",                     -- lua formatter
-          "bash-language-server",       -- bash LSP
-          "html-lsp",                   -- html LSP
-          "css-lsp",                    -- css LSP
-          "prettier",                   -- prettier formatter: html, css, json, yaml, markdown
-          "python-lsp-server",          -- python LSP & formatter
-          "basedpyright",               -- python LSP
-          "clangd",                     -- c/c++ LSP
-          -- "r_language_server",         -- R LSP
-          "awk-language-server",        -- awk LSP
-          "dockerfile-language-server", -- dockerfile LSP
-          "typst-lsp",                  -- typst LSP
-          "gopls",                      -- go LSP
-          "julia-lsp",                  -- julia LSP
-        },
-        auto_update = false,
-        run_on_start = true,
-        -- start_delay = 3000,
-        -- debounce_hours = 5,
-        integrations = {
-          ["mason-lspconfig"] = true,
-          ["mason-null-ls"] = true,
-          ["mason-nvim-dap"] = true,
-        },
-      }
+      require("mason-tool-installer").setup(require("../configs/auto-mason"))
     end,
   },
-  {
+  { -- Code Window
     "gorbit99/codewindow.nvim",
     lazy = false,
     config = function()
       local codewindow = require "codewindow"
       codewindow.setup {
         auto_enable = true,
-        show_cursor = true,
+        show_cursor = false,
         side = "right",
         screen_bounds = "lines", -- lines, background
         window_border = "none", -- none, single, double
       }
       codewindow.apply_default_keybinds()
+    end,
+  },
+  -- {
+  --   'wfxr/minimap.vim',
+  --   build = 'cargo install --locked code-minimap',
+  --   lazy = false,
+  --   config = function()
+  --     vim.g.minimap_width = 20
+  --     vim.g.minimap_git_colors = 1
+  --     vim.g.minimap_auto_start = 1
+  --     vim.g.minimap_auto_start_win_enter = 1
+  --     vim.g.minimap_highlight_search = 1
+  --   end,
+  -- },
+  {
+    "lukas-reineke/virt-column.nvim",
+    lazy = false,
+    config = function()
+      require("virt-column").setup {}
     end,
   },
   {
@@ -116,7 +108,7 @@ return {
     end,
     config = function()
       vim.g.mkdp_browser = "qutebrowser"
-      vim.g.mkdp_theme = "dark"
+      vim.g.mkdp_theme = "light"
       vim.g.mkdp_auto_close = 1
       -- vim.g.mkdp_markdown_css = '/home/tibless/.config/Typora/themes/hugo.css'
     end,
@@ -135,56 +127,43 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
-      require("nvim-tree").setup {
-        -- 基本设置
-        filters = { dotfiles = true },
-        update_focused_file = {
-          enable = true, -- 更新文件
-          update_cwd = true, -- 更新当前目录
-        },
-        view = {
-          width = 25,
-          side = "left",
-        },
-        renderer = {
-          root_folder_label = true, -- 显示根目录名称
-          indent_markers = { enable = true },
+      require("nvim-tree").setup(require("../configs/nvtree"))
+    end,
+  },
+  {
+    "goolord/alpha-nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      local dashboard = require "alpha.themes.dashboard"
+      local config = require("../configs/dashconfigs").dashconfigs.default
+      local applyColors = require("../configs/dashconfigs").applyColors
 
-          -- 自定义图标设置
-          icons = {
-            webdev_colors = true, -- 启用颜色
-
-            -- 自定义文件夹图标
-            glyphs = {
-              folder = {
-                -- arrow_closed = "", -- 关闭的文件夹箭头
-                -- arrow_open = "",   -- 打开的文件夹箭头
-                default = " ", -- 默认文件夹
-                -- default = " ",      -- 默认文件夹
-                open = " ", -- 打开的文件夹
-                empty = " ", -- 空文件夹
-                -- empty = " ",        -- 空文件夹
-                empty_open = " ", -- 打开的空文件夹
-                symlink = " ", -- 符号链接文件夹
-                symlink_open = " ", -- 打开的符号链接文件夹
-              },
-
-              -- 自定义文件图标
-              default = "󰷆", -- 默认文件
-              symlink = "", -- 符号链接
-              git = {
-                unstaged = "✗",
-                staged = "✓",
-                unmerged = "",
-                renamed = "➜",
-                untracked = "★",
-                deleted = "",
-                ignored = "◌",
-              },
-            },
-          },
-        },
+      -- Buttons
+      dashboard.section.buttons.val = {
+        dashboard.button("n", "  New file", ":ene<CR>"),
+        dashboard.button("f f", "  Find File", ":Telescope find_files<CR>"),
+        dashboard.button("f o", "  Recent Files", ":Telescope oldfiles<CR>"),
+        dashboard.button("t h", "󱥚  Themes", ":lua require('nvchad.themes').open()<CR>"),
+        dashboard.button("c h", "  Mappings", ":NvCheatsheet<CR>"),
       }
+
+      -- Footer
+      local stats = require("lazy").stats()
+      local ms = math.floor(stats.startuptime) .. " ms"
+      dashboard.section.footer.val = {
+        "",
+        "",
+        "--------------------------------------------------",
+        "          Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms,
+        "--------------------------------------------------",
+      }
+
+      -- Header
+      require("alpha").setup(applyColors(config.logo, config.colors, config.logoColors))
     end,
   },
 }

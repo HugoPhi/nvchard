@@ -1,3 +1,5 @@
+local bannar = require "../configs/bannar"
+
 local options = {
 
   base46 = {
@@ -43,28 +45,16 @@ local options = {
   },
 
   nvdash = {
-    load_on_startup = true,
-    header = {
-      "                            ",
-      "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
-      "   ▄▀███▄     ▄██ █████▀    ",
-      "   ██▄▀███▄   ███           ",
-      "   ███  ▀███▄ ███           ",
-      "   ███    ▀██ ███           ",
-      "   ███      ▀ ███           ",
-      "   ▀██ █████▄▀█▀▄██████▄    ",
-      "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
-      "                            ",
-      "     Powered By  eovim    ",
-      "                            ",
-    },
+    load_on_startup = false,
+    header = bannar["krakedking"],
+    -- header = bannar["defalut"],
 
     buttons = {
       { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
       { txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
-      { txt = "󰈭  Find Word", keys = "Spc f w", cmd = "Telescope live_grep" },
-      { txt = "󱥚  Themes", keys = "Spc t h", cmd = ":lua require('nvchad.themes').open()" },
-      { txt = "  Mappings", keys = "Spc c h", cmd = "NvCheatsheet" },
+      -- { txt = "󰈭  Find Word", keys = "Spc f w", cmd = "Telescope live_grep" },
+      -- { txt = "󱥚  Themes", keys = "Spc t h", cmd = ":lua require('nvchad.themes').open()" },
+      -- { txt = "  Mappings", keys = "Spc c h", cmd = "NvCheatsheet" },
 
       { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
 

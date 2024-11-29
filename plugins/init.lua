@@ -4,7 +4,7 @@ return {
     lazy = false,
     dependencies = { "williamboman/mason.nvim" },
     config = function()
-      require("mason-tool-installer").setup(require("../configs/auto-mason"))
+      require("mason-tool-installer").setup(require "../configs/auto-mason")
     end,
   },
   { -- Code Window
@@ -22,18 +22,18 @@ return {
       codewindow.apply_default_keybinds()
     end,
   },
-  -- {
-  --   'wfxr/minimap.vim',
-  --   build = 'cargo install --locked code-minimap',
-  --   lazy = false,
-  --   config = function()
-  --     vim.g.minimap_width = 20
-  --     vim.g.minimap_git_colors = 1
-  --     vim.g.minimap_auto_start = 1
-  --     vim.g.minimap_auto_start_win_enter = 1
-  --     vim.g.minimap_highlight_search = 1
-  --   end,
-  -- },
+  {
+    'wfxr/minimap.vim',
+    build = 'cargo install --locked code-minimap',
+    lazy = true,
+    config = function()
+      vim.g.minimap_width = 20
+      vim.g.minimap_git_colors = 1
+      vim.g.minimap_auto_start = 1
+      vim.g.minimap_auto_start_win_enter = 1
+      vim.g.minimap_highlight_search = 1
+    end,
+  },
   {
     "lukas-reineke/virt-column.nvim",
     lazy = false,
@@ -61,14 +61,14 @@ return {
       vim.g.codeium_enabled = true
     end,
   },
-  -- {
-  --   "simrat39/symbols-outline.nvim",
-  --   show_guides = true,
-  --   lazy = false,
-  --   config = function()
-  --     require("symbols-outline").setup()
-  --   end
-  -- },
+  {
+    "simrat39/symbols-outline.nvim",
+    show_guides = true,
+    lazy = true,
+    config = function()
+      require("symbols-outline").setup()
+    end
+  },
 
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -127,7 +127,7 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
-      require("nvim-tree").setup(require("../configs/nvtree"))
+      require("nvim-tree").setup(require "../configs/nvtree")
     end,
   },
   {
@@ -139,16 +139,22 @@ return {
     },
     config = function()
       local dashboard = require "alpha.themes.dashboard"
-      local config = require("../configs/dashconfigs").dashconfigs.default
-      local applyColors = require("../configs/dashconfigs").applyColors
+      -- Header
+      -- local header = require("../configs/dash/girl_cig").header
+      -- local header = require("../configs/dash/neovim").header
+      -- local header = require("../configs/dash/lufei").header
+      local header = require("../configs/dash/lufei").header
+
+      dashboard.section.header.val = header.val
+      dashboard.section.header.opts.hl = header.opts.hl
 
       -- Buttons
       dashboard.section.buttons.val = {
-        dashboard.button("n", "  New file", ":ene<CR>"),
-        dashboard.button("f f", "  Find File", ":Telescope find_files<CR>"),
         dashboard.button("f o", "  Recent Files", ":Telescope oldfiles<CR>"),
+        dashboard.button("f f", "  Find File", ":Telescope find_files<CR>"),
+        dashboard.button("n", "  New file", ":ene<CR>"),
         dashboard.button("t h", "󱥚  Themes", ":lua require('nvchad.themes').open()<CR>"),
-        dashboard.button("c h", "  Mappings", ":NvCheatsheet<CR>"),
+        -- dashboard.button("c h", "  Mappings", ":NvCheatsheet<CR>"),
       }
 
       -- Footer
@@ -156,14 +162,12 @@ return {
       local ms = math.floor(stats.startuptime) .. " ms"
       dashboard.section.footer.val = {
         "",
-        "",
         "--------------------------------------------------",
         "          Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms,
         "--------------------------------------------------",
       }
 
-      -- Header
-      require("alpha").setup(applyColors(config.logo, config.colors, config.logoColors))
+      require("alpha").setup(dashboard.config)
     end,
   },
 }

@@ -9,8 +9,8 @@ local servers = {
   "html",                       -- html LSP
   "cssls",                      -- css LSP
   "vtsls",                      -- ts, js LSP
-  "basedpyright",               -- python LSP
-  -- "pylsp",                      -- python LSP
+  -- "basedpyright",               -- python LSP
+  "pylsp",                      -- python LSP
   "clangd",                     -- c/cpp LSP
   "r_language_server",          -- R LSP
   "bashls",                     -- bash LSP

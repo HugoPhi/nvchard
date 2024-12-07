@@ -28,7 +28,7 @@ return {
     config = function()
       local codewindow = require "codewindow"
       codewindow.setup {
-        auto_enable = true,
+        auto_enable = false,
         show_cursor = false,
         side = "right",
         screen_bounds = "lines", -- lines, background
@@ -127,10 +127,21 @@ return {
     end,
     config = function()
       vim.g.mkdp_browser = "qutebrowser"
-      vim.g.mkdp_theme = "light"
+      vim.g.mkdp_theme = "dark"
       vim.g.mkdp_auto_close = 1
       -- vim.g.mkdp_markdown_css = '/home/tibless/.config/Typora/themes/hugo.css'
     end,
+  },
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+    lazy = false,
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
   },
 
   {

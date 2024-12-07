@@ -16,7 +16,7 @@ local options = {
     cmp = {
       icons_left = false, -- only for non-atom styles!
       lspkind_text = true,
-      style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+      style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
       format_colors = {
         tailwind = false, -- will work for css lsp too
         icon = "󱓻",
@@ -37,9 +37,10 @@ local options = {
 
     -- lazyload it when there are 1+ buffers
     tabufline = {
-      enabled = false,
+      enabled = true,
       lazyload = false,
-      order = { "treeOffset", "buffers", "tabs", "btns" },
+      -- order = { "treeOffset", "buffers", "tabs", "btns" },
+      order = { "treeOffset", "buffers" },
       modules = nil,
     },
   },

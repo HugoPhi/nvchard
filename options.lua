@@ -5,6 +5,7 @@ vim.o.relativenumber = true
 vim.o.number = true
 vim.o.autochdir = true
 vim.o.cursorline = false
+vim.o.wrap = false
 vim.o.whichwrap = "b,s,<,>,[,]"
 vim.g.indent_blankline_show_first_indent_level = true
 
@@ -57,6 +58,10 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   end,
 })
 
+vim.api.nvim_set_hl(0, "MyHighlightGroup", {bg = "#000000"})
+require("notify").setup({
+  background_colour = "MyHighlightGroup",
+})
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   callback = function()
 --     require("virt-column").setup {

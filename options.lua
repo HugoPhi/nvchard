@@ -8,6 +8,13 @@ vim.o.cursorline = false
 vim.o.whichwrap = "b,s,<,>,[,]"
 vim.g.indent_blankline_show_first_indent_level = true
 
+-- 设置 TabLine 背景为透明
+vim.cmd [[
+  highlight TabLine guibg=NONE
+  highlight TabLineFill guibg=NONE
+  highlight TabLineSel guibg=NONE
+]]
+
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("BufReadPost", {

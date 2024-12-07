@@ -18,7 +18,7 @@ local servers = {
   "dockerls",                   -- DockerFile LSP
   "sqls",                       -- SQL LSP
   "rust_analyzer",              -- rust LSP
-  "typst_lsp",                  -- typst LSP
+  "tinymist",                   -- typst LSP
   "gopls",                      -- golang LSP
   "julials",                    -- julia LSP
 }

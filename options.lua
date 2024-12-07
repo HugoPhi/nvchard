@@ -58,18 +58,13 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   end,
 })
 
-vim.api.nvim_set_hl(0, "MyHighlightGroup", {bg = "#000000"})
-require("notify").setup({
-  background_colour = "MyHighlightGroup",
-})
--- vim.api.nvim_create_autocmd("BufEnter", {
---   callback = function()
---     require("virt-column").setup {
---       char = ".",
---       virtcolumn = "100",
---     }
---   end,
--- })
+-- notification
+vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#000000" })
+
+-- tabufline
+vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "TabLineFill", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "TabLineSel", { bg = "NONE" })
 
 -- Code Window
 vim.api.nvim_set_hl(0, "CodewindowUnderline", {

@@ -5,7 +5,7 @@ local M = {
     update_cwd = true, -- 更新当前目录
   },
   view = {
-    width = 25,
+    width = 40,
     side = "left",
   },
   renderer = {

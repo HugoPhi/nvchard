@@ -1,5 +1,20 @@
 return {
   {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+  },
+  {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     lazy = false,
     dependencies = { "williamboman/mason.nvim" },
@@ -23,8 +38,8 @@ return {
     end,
   },
   {
-    'wfxr/minimap.vim',
-    build = 'cargo install --locked code-minimap',
+    "wfxr/minimap.vim",
+    build = "cargo install --locked code-minimap",
     lazy = true,
     config = function()
       vim.g.minimap_width = 20
@@ -64,10 +79,14 @@ return {
   {
     "simrat39/symbols-outline.nvim",
     show_guides = true,
-    lazy = true,
+    lazy = false,
     config = function()
-      require("symbols-outline").setup()
-    end
+      require("symbols-outline").setup {
+        position = "left",
+        width = 40,
+        auto_close = true,
+      }
+    end,
   },
 
   {
@@ -140,18 +159,18 @@ return {
     config = function()
       local dashboard = require "alpha.themes.dashboard"
       -- Header
-      -- local header = require("../configs/dash/girl_cig").header
+      local header = require("../configs/dash/girl_cig").header
       -- local header = require("../configs/dash/neovim").header
       -- local header = require("../configs/dash/lufei").header
-      local header = require("../configs/dash/lufei").header
+      -- local header = require("../configs/dash/calm_eyes").header
 
       dashboard.section.header.val = header.val
       dashboard.section.header.opts.hl = header.opts.hl
 
       -- Buttons
       dashboard.section.buttons.val = {
-        dashboard.button("f o", "  Recent Files", ":Telescope oldfiles<CR>"),
         dashboard.button("f f", "  Find File", ":Telescope find_files<CR>"),
+        dashboard.button("f o", "  Recent Files", ":Telescope oldfiles<CR>"),
         dashboard.button("n", "  New file", ":ene<CR>"),
         dashboard.button("t h", "󱥚  Themes", ":lua require('nvchad.themes').open()<CR>"),
         -- dashboard.button("c h", "  Mappings", ":NvCheatsheet<CR>"),

@@ -3,13 +3,13 @@ local bannar = require "../configs/bannar"
 local options = {
 
   base46 = {
-    theme = "doomchad",
+    theme = "bearded-arc",
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = true,
-    theme_toggle = { "doomchad", "doomchad" },
+    theme_toggle = { "bearded-arc", "bearded-arc" },
   },
 
   ui = {

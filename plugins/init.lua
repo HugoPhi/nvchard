@@ -1,19 +1,4 @@
 return {
-  -- {
-  --   "folke/noice.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     -- add any options here
-  --   },
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     "rcarriga/nvim-notify",
-  --   },
-  -- },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     lazy = false,
@@ -21,6 +6,15 @@ return {
     config = function()
       require("mason-tool-installer").setup(require "../configs/auto-mason")
     end,
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    lazy = false,
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    opts = {},
   },
   { -- Code Window
     "gorbit99/codewindow.nvim",
@@ -35,18 +29,6 @@ return {
         window_border = "none", -- none, single, double
       }
       codewindow.apply_default_keybinds()
-    end,
-  },
-  {
-    "wfxr/minimap.vim",
-    build = "cargo install --locked code-minimap",
-    lazy = true,
-    config = function()
-      vim.g.minimap_width = 20
-      vim.g.minimap_git_colors = 1
-      vim.g.minimap_auto_start = 1
-      vim.g.minimap_auto_start_win_enter = 1
-      vim.g.minimap_highlight_search = 1
     end,
   },
   {
@@ -115,31 +97,6 @@ return {
       end)
 
       require("ibl").setup { indent = { highlight = highlight } }
-    end,
-  },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-    config = function()
-      vim.g.mkdp_browser = "qutebrowser"
-      vim.g.mkdp_theme = "light"
-      vim.g.mkdp_auto_close = 1
-      -- vim.g.mkdp_markdown_css = '/home/tibless/.config/Typora/themes/hugo.css'
-    end,
-  },
-
-  {
-    "lervag/vimtex",
-    lazy = false, -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
-    init = function()
-      -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_view_method = "zathura"
     end,
   },
 

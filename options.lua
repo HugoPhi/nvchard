@@ -5,7 +5,10 @@ vim.o.relativenumber = true
 vim.o.number = true
 vim.o.autochdir = true
 vim.o.cursorline = false
+vim.o.wrap = false
 vim.o.whichwrap = "b,s,<,>,[,]"
+vim.o.sidescroll = 1
+vim.o.sidescrolloff = 30
 vim.g.indent_blankline_show_first_indent_level = true
 
 -- 设置 TabLine 背景为透明

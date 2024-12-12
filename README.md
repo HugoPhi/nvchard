@@ -1,3 +1,6 @@
+> **此项目已迁移至 [新项目名称](新仓库链接)，请访问新的仓库获取最新信息和更新。**
+
+
 # nvcustom - Neovim Configuration Based on NvChad 🎨
 
 [中文文档](./README_zh.md)
